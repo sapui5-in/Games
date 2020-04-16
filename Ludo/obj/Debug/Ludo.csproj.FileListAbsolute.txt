@@ -1,0 +1,10 @@
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.csprojAssemblyReference.cache
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.csproj.CoreCompileInputs.cache
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\bin\Debug\Ludo.exe.config
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\bin\Debug\Ludo.exe
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\bin\Debug\Ludo.pdb
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.exe
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.pdb
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.UI.Class.Form1.resources
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.csproj.GenerateResource.cache
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.UI.Class.GameBoardForm.resources
