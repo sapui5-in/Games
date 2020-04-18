@@ -56,10 +56,10 @@
     <Compile Include="UI\Class\Controls\Ghor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Class\Controls\Piece.cs">
+    <Compile Include="UI\Class\Controls\Piece.cs" />
+    <Compile Include="UI\Class\Controls\PieceRenderer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Class\Controls\PieceRenderer.cs" />
     <Compile Include="UI\Class\Controls\QuadrantHome.cs" />
     <Compile Include="UI\Class\Controls\QuadrantHomeRenderer.cs" />
     <Compile Include="UI\Class\Form1.cs">
@@ -69,13 +69,14 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Class\Game.cs" />
-    <Compile Include="UI\Class\GameBoard.cs" />
     <Compile Include="UI\Class\GameBoardForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Class\GameBoardForm.Designer.cs">
       <DependentUpon>GameBoardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Class\GameFlow.cs" />
+    <Compile Include="UI\Class\PiecePosition.cs" />
     <Compile Include="UI\Class\Player.cs" />
     <Compile Include="UI\Class\Controls\QuadrantRenderer.cs" />
     <Compile Include="UI\Class\Controls\Quadrant.cs" />
@@ -83,19 +84,22 @@
     <Compile Include="UI\Enum\GhorColor.cs" />
     <Compile Include="UI\Enum\GhorType.cs" />
     <Compile Include="UI\Enum\Color.cs" />
+    <Compile Include="UI\EventArg\DiceRollEventArgs.cs" />
+    <Compile Include="UI\EventArg\PieceClickEventArgs.cs" />
+    <Compile Include="UI\EventArg\PiecePositionChangedEventArgs.cs" />
     <Compile Include="UI\Interface\IGame.cs" />
     <Compile Include="UI\Interface\IGameBoard.cs" />
     <Compile Include="UI\Class\GameBoardPosition.cs" />
     <Compile Include="UI\Interface\IPlayer.cs" />
     <Compile Include="UI\Interface\IQuadrant.cs" />
     <Compile Include="UI\Interface\IRenderer.cs" />
+    <Compile Include="UI\Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="API\" />
-    <Folder Include="UI\Utils\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Class\Form1.resx">

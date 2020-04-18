@@ -7,12 +7,14 @@ using System.Windows.Forms;
 
 namespace Ludo.UI.Class
 {
-    class DiceRenderer : Button
+    public class DiceRenderer : Button
     {
         public DiceRenderer()
             : base()
         {
             this.Size = new System.Drawing.Size(60, 60);
+            this.ForeColor = System.Drawing.Color.White;
+            this.Text = "0";
         }
     }
 }

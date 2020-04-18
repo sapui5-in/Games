@@ -1,4 +1,5 @@
 ﻿using Ludo.UI.Enum;
+using Ludo.UI.EventArg;
 using Ludo.UI.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace Ludo.UI.Class
 {
     public class Player : IPlayer
     {
+        public delegate void EventHandler(object sender, PiecePositionChangedEventArgs e);
+        public delegate void PieceClickEventHandler(object sender, PieceClickEventArgs e);
+
+        public event EventHandler PieceMoved;
+        public event PieceClickEventHandler PieceClicked;
+
         public Piece[] Pieces = new Piece[4];
 
         public Enum.Color Color;
@@ -28,7 +35,6 @@ namespace Ludo.UI.Class
             set
             {
                 quadrant = value;
-                //this.Color = Quadrant.Color;
                 this.SetInitialPiecePosition();
             }
         }
@@ -39,12 +45,52 @@ namespace Ludo.UI.Class
             for (int i = 0; i < Pieces.Length; i++)
             {
                 Pieces[i] = new Piece(i, Color);
+                Pieces[i].PositionChanged += this.Piece_PositionChanged;
+                Pieces[i].Click += this.Piece_Clicked;
             }
         }
 
-        public Player(System.Drawing.Color red)
+        public void DisableAllPieceMovement()
         {
-            this.red = red;
+            foreach (Piece piece in Pieces)
+            {
+                piece.Movable = false;
+            }
+        }
+
+        private void Piece_Clicked(object sender, EventArgs e)
+        {
+            foreach (Piece piece in Pieces)
+            {
+                piece.Movable = false;
+            }
+
+            if (PieceClicked != null)
+            {
+                PieceClicked(this, new PieceClickEventArgs
+                {
+                    Piece = (sender as Piece)
+                });
+            }
+        }
+
+        private void Piece_PositionChanged(object sender, PiecePositionChangedEventArgs e)
+        {
+            if (PieceMoved != null)
+            {
+                PieceMoved(this, new PiecePositionChangedEventArgs
+                {
+                    Piece = (sender as Piece),
+                    OldPosition = e.OldPosition,
+                    NewPosition = e.NewPosition,
+                    Player = this
+                });
+            }
+        }
+
+        public Player(System.Drawing.Color color)
+        {
+            this.red = color;
         }
 
         private void SetInitialPiecePosition()
@@ -53,52 +99,6 @@ namespace Ludo.UI.Class
             {
                 this.Pieces[i].GameBoardPosition = new GameBoardPosition(Quadrant, Quadrant.QuadrantHome.GhorPositions[i]);
             }
-        }
-
-        // Check Move Feasibility
-
-        // Move Piece - Final Destination
-        public void MovePiece(Piece piece, int count)
-        {
-            // Show Transition
-            GameBoardPosition newPosition = this.CheckValidMove(piece, count);
-
-            if (newPosition != null)
-            {
-                // Show Transition
-
-                //Move to Final Position
-                piece.GameBoardPosition = newPosition;
-            }
-        }
-
-        public GameBoardPosition CheckValidMove(Piece piece, int count)
-        {
-            bool flag = true;
-
-            if (piece.GameBoardPosition.Ghor.Position != -1)
-            {
-                // From Home, only 6 can make him move to Start Star
-                if (piece.GameBoardPosition.Ghor.GhorType == GhorType.Home)
-                {
-                    if (count == 6)
-                    {
-                        count = 1;
-                    }
-                    else
-                    {
-                        flag = false;
-                    }
-                }
-
-                if (flag)
-                {
-                    GameBoardPosition currentPiecePosition = new GameBoardPosition(piece.GameBoardPosition.Quadrant, piece.GameBoardPosition.Ghor);
-                    return Game.GameBoard.GetNthGhorPosition(currentPiecePosition, count, this);
-                }
-            }
-
-            return null;
         }
     }
 }

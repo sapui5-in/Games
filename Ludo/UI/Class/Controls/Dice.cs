@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ludo.UI.EventArg;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,22 +7,63 @@ using System.Threading.Tasks;
 
 namespace Ludo.UI.Class
 {
-    class Dice : Control
+    public class Dice : Control
     {
         public DiceRenderer DiceRenderer = new DiceRenderer();
 
-        public Dice()
+        public delegate void EventHandler(object sender, DiceRollEventArgs e);
+        public event EventHandler DiceRolled;
+        
+        private bool canDiceBeRolled;
+        public bool CanDiceBeRolled
         {
+            get
+            {
+                return canDiceBeRolled;
+            }
+            set
+            {
+                canDiceBeRolled = value;
 
+                if (value)
+                {
+                    DiceRenderer.Enabled = true;
+                }
+                else
+                {
+                    DiceRenderer.Enabled = false;
+                }
+            }
         }
 
-        public int Roll()
+        public Dice(bool canDiceBeRolled)
         {
-            Random random = new Random();
-            int diceValue = random.Next(1, 7);
-            DiceRenderer.Text = diceValue.ToString();
+            CanDiceBeRolled = canDiceBeRolled;
+            DiceRenderer.Click += new System.EventHandler(this.dice_Click);
+        }
 
-            return diceValue;
+        public void Roll()
+        {
+            if (CanDiceBeRolled)
+            {
+                Random random = new Random();
+                int diceValue = random.Next(1, 7);
+                DiceRenderer.Text = diceValue.ToString();
+                CanDiceBeRolled = false;
+
+                if (DiceRolled != null)
+                {
+                    DiceRolled(this, new DiceRollEventArgs
+                    {
+                        DiceValue = diceValue
+                    });
+                }
+            }
+        }
+
+        private void dice_Click(object sender, EventArgs e)
+        {
+            Roll();
         }
     }
 }
