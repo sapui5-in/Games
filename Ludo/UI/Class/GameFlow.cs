@@ -129,32 +129,32 @@ namespace Ludo.UI.Class
                 ghor.Controls.Add(e.Piece.PieceRenderer);
                 e.Piece.PieceRenderer.BringToFront();
 
-                if (e.Player == CurrentPlayer)
+                if (e.Piece.GameBoardPosition.Ghor.GhorType != GhorType.Home)
                 {
-                    //TakeOpponentPiece(e.Piece);
-
-                    if (!ContinueCurrentPlayerTurn())
-                    {
-                        Player nextPlayer = this.GetNextPlayer();
-                        if (nextPlayer != null)
-                        {
-                            this.SetCurrentPlayer(nextPlayer);
-                        }
-                    }
-                    else
+                    if (TakeOpponentPiece(e.Piece))
                     {
                         CurrentPlayer.DisableAllPieceMovement();
+                    } else
+                    {
+                        if (!ContinueCurrentPlayerTurn())
+                        {
+                            Player nextPlayer = this.GetNextPlayer();
+                            if (nextPlayer != null)
+                            {
+                                this.SetCurrentPlayer(nextPlayer);
+                            }
+                        }
+                        else
+                        {
+                            CurrentPlayer.DisableAllPieceMovement();
+                        }
                     }
                 }
                 Dice.CanDiceBeRolled = true;
             }
-            //if (e.Player == CurrentPlayer)
-            //{
-                //Dice.CanDiceBeRolled = true;
-            //}
         }
 
-        private void TakeOpponentPiece(Piece piece)
+        private bool TakeOpponentPiece(Piece piece)
         {
             foreach (Player player in Players)
             {
@@ -167,10 +167,13 @@ namespace Ludo.UI.Class
                             Quadrant quadrant = player.Quadrant;
                             piece1.GameBoardPosition =
                                 new GameBoardPosition(quadrant, quadrant.QuadrantHome.GhorPositions[piece1.Position]);
+                            return true;
                         }
                     }
                 }
             }
+
+            return false;
         }
 
 
