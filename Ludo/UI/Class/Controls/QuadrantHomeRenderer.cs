@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ludo.UI.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -88,23 +89,7 @@ namespace Ludo.UI.Class.Controls
 
             System.Drawing.Color color;
 
-
-            if (QuadrantHome.Color == Enum.Color.Red)
-            {
-                color = System.Drawing.Color.Red;
-            }
-            else if (QuadrantHome.Color == Enum.Color.Green)
-            {
-                color = System.Drawing.Color.Green;
-            }
-            else if (QuadrantHome.Color == Enum.Color.Blue)
-            {
-                color = System.Drawing.Color.Blue;
-            }
-            else
-            {
-                color = System.Drawing.Color.Yellow;
-            }
+            color = Util.GetDrawingColor(QuadrantHome.Color);
 
             ghor.BackColor = color;
             ghor.Margin = new System.Windows.Forms.Padding(0);
@@ -117,8 +102,6 @@ namespace Ludo.UI.Class.Controls
             label.Text = ghor.Position.ToString();
 
             ghor.Controls.Add(label);
-
-            //QuadrantHome.
 
             return ghor;
         }

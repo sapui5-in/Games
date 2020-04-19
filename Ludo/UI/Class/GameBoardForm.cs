@@ -6,6 +6,7 @@ namespace Ludo.UI.Class
 {
     public partial class GameBoardForm : Form
     {
+        public bool Flag = true;
         public int BoardSize = 750;
         public Quadrant[] Quadrants = new Quadrant[4];
 
@@ -27,7 +28,7 @@ namespace Ludo.UI.Class
 
         private void CreateQuadrants()
         {
-            for (int i = 0; i<Quadrants.Length; i++)
+            for (int i = 0; i < Quadrants.Length; i++)
             {
                 Quadrants[i] = new Quadrant(i, BoardSize);
                 this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

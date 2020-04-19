@@ -11,6 +11,8 @@ namespace Ludo.UI.Class
 {
     public class QuadrantRenderer : Renderer
     {
+        private bool Flag = false;
+
         public Quadrant Quadrant;
         public QuadrantHomeRenderer QuadrantHomeRenderer;
 
@@ -23,11 +25,35 @@ namespace Ludo.UI.Class
         private int ContainerXPosition;
         private int ContainerYPosition;
         private int BoardSize;
-        private System.Drawing.Color Color;
+        private Color Color;
+
+        private System.Windows.Forms.Timer timer1;
 
         public TableLayoutPanel MainTableLayout;
         public Panel QuadrantHome;
         public Panel Container;
+
+        private bool active = true;
+        public bool Active
+        {
+            get
+            {
+                return active;
+            }
+            set
+            {
+                active = value;
+                if (active)
+                {
+                    this.timer1.Start();
+                }
+                else
+                {
+                    this.QuadrantHome.BackColor = Utils.Util.GetDrawingColor(Color);
+                    this.timer1.Stop();
+                }
+            }
+        }
 
         public QuadrantRenderer(Quadrant quadrant)
         {
@@ -35,6 +61,11 @@ namespace Ludo.UI.Class
             QuadrantHomeRenderer = new QuadrantHomeRenderer(Quadrant.QuadrantHome);
             this.SetInitialParameters(quadrant.BoardSize, Quadrant.QuadrantPosition);
             this.Renderer(Quadrant.QuadrantPosition);
+
+
+            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
         }
 
         private void SetInitialParameters(int boardSize, int quadrantPos)
@@ -52,7 +83,7 @@ namespace Ludo.UI.Class
                 ColumnCount = 8;
                 RowCount = 7;
 
-                Color = System.Drawing.Color.Red;
+                Color = Color.Red;
             }
             else if (quadrantPos == 1)
             {
@@ -65,7 +96,7 @@ namespace Ludo.UI.Class
                 ColumnCount = 7;
                 RowCount = 8;
 
-                Color = System.Drawing.Color.Green;
+                Color = Color.Green;
             }
             else if (quadrantPos == 2)
             {
@@ -78,7 +109,7 @@ namespace Ludo.UI.Class
                 ColumnCount = 8;
                 RowCount = 7;
 
-                Color = System.Drawing.Color.Blue;
+                Color = Color.Blue;
             }
             else
             {
@@ -91,7 +122,7 @@ namespace Ludo.UI.Class
                 ColumnCount = 7;
                 RowCount = 8;
 
-                Color = System.Drawing.Color.Yellow;
+                Color = Color.Yellow;
             }
         }
 
@@ -115,17 +146,14 @@ namespace Ludo.UI.Class
             this.Container.Anchor = ((AnchorStyles)(((AnchorStyles.Top
                 | AnchorStyles.Bottom) | AnchorStyles.Left)));
             this.Container.Size = new System.Drawing.Size(this.CellSize * this.ColumnCount + 1, this.CellSize * this.RowCount + 1);
-            this.Container.Name = "Container";
             this.Container.Margin = new Padding(0);
 
             this.Container.Location = new System.Drawing.Point(9 + ContainerXPosition, 9 + ContainerYPosition);
-            //this.Container.SuspendLayout();
         }
 
         private void CreateMainTableLayout()
         {
             this.MainTableLayout = new TableLayoutPanel();
-            //this.MainTableLayout.SuspendLayout();
 
             this.MainTableLayout.Anchor = ((AnchorStyles)(((AnchorStyles.Top
                 | AnchorStyles.Bottom) | (AnchorStyles.Left | AnchorStyles.Right))));
@@ -135,7 +163,6 @@ namespace Ludo.UI.Class
 
             this.MainTableLayout.Location = new System.Drawing.Point(0, 0);
             this.MainTableLayout.Margin = new Padding(0);
-            this.MainTableLayout.Name = "MainTableLayout";
 
             this.CreateColumns();
             this.CreateRows();
@@ -167,14 +194,13 @@ namespace Ludo.UI.Class
         {
             this.QuadrantHome = new Panel();
             //this.QuadrantHome.SuspendLayout();
-            this.QuadrantHome.BackColor = this.Color;
+            this.QuadrantHome.BackColor = Utils.Util.GetDrawingColor(Color);
 
             int xPos = XPosition * (this.ColumnCount - 6) * this.CellSize;
             int yPos = YPosition * (this.RowCount - 6) * this.CellSize;
 
             this.QuadrantHome.Location = new System.Drawing.Point(xPos + 1, yPos + 1);
             this.QuadrantHome.Margin = new Padding(0);
-            this.QuadrantHome.Name = "QuadrantHome";
             this.QuadrantHome.Size = new System.Drawing.Size(6 * this.CellSize - 1, 6 * this.CellSize - 1);
         }
 
@@ -277,7 +303,7 @@ namespace Ludo.UI.Class
             | AnchorStyles.Left) | AnchorStyles.Right)));
             if (position == 1 || position >= 13)
             {
-                ghor.BackColor = Color;
+                ghor.BackColor = Utils.Util.GetDrawingColor(Color);
                 if (ghor.Position == 18)
                 {
                     ghor.Position = -1;
@@ -298,6 +324,27 @@ namespace Ludo.UI.Class
             ghor.Controls.Add(label);
 
             return ghor;
+        }
+
+        private void timer1_Tick(object sender, System.EventArgs e)
+        {
+            ToggleBlink();
+        }
+
+        private void ToggleBlink()
+        {
+            if (Active)
+            {
+                if (Flag)
+                {
+                    this.QuadrantHome.BackColor = Utils.Util.GetDarkDrawingColor(Color);
+                }
+                else
+                {
+                    this.QuadrantHome.BackColor = Utils.Util.GetDrawingColor(Color);
+                }
+                Flag = !Flag;
+            }
         }
     }
 }

@@ -32,5 +32,29 @@ namespace Ludo.UI.Utils
 
             return col;
         }
+
+        public static System.Drawing.Color GetDarkDrawingColor(Color color)
+        {
+            System.Drawing.Color col;
+
+            if (color == Enum.Color.Red)
+            {
+                col = System.Drawing.Color.DarkRed;
+            }
+            else if (color == Enum.Color.Green)
+            {
+                col = System.Drawing.Color.DarkGreen;
+            }
+            else if (color == Enum.Color.Blue)
+            {
+                col = System.Drawing.Color.DarkBlue;
+            }
+            else
+            {
+                col = System.Drawing.Color.Yellow;
+            }
+
+            return col;
+        }
     }
 }

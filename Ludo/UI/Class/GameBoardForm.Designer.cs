@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            //this.SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // timer1
+            // 
+
+            
             // 
             // GameBoardForm
             // 
@@ -37,6 +43,8 @@
             this.ClientSize = new System.Drawing.Size(884, 861);
             this.Name = "GameBoardForm";
             this.Text = "GameBoardForm";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

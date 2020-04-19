@@ -240,7 +240,12 @@ namespace Ludo.UI.Class
 
         private void SetCurrentPlayer(Player player)
         {
+            if (CurrentPlayer != null)
+            {
+                CurrentPlayer.Quadrant.QuadrantRenderer.Active = false;
+            }
             CurrentPlayer = player;
+            CurrentPlayer.Quadrant.QuadrantRenderer.Active = true;
             Dice.DiceRenderer.BackColor = Util.GetDrawingColor(CurrentPlayer.Color);
         }
 
