@@ -52,10 +52,10 @@
     <Compile Include="UI\Class\Controls\DiceRenderer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Class\Controls\GhorRenderer.cs" />
-    <Compile Include="UI\Class\Controls\Ghor.cs">
+    <Compile Include="UI\Class\Controls\GhorRenderer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Class\Controls\Ghor.cs" />
     <Compile Include="UI\Class\Controls\Piece.cs" />
     <Compile Include="UI\Class\Controls\PieceRenderer.cs">
       <SubType>Component</SubType>
@@ -87,6 +87,7 @@
     <Compile Include="UI\EventArg\DiceRollEventArgs.cs" />
     <Compile Include="UI\EventArg\PieceClickEventArgs.cs" />
     <Compile Include="UI\EventArg\PiecePositionChangedEventArgs.cs" />
+    <Compile Include="UI\EventArg\TransitionTimeEventArgs.cs" />
     <Compile Include="UI\Interface\IGame.cs" />
     <Compile Include="UI\Interface\IGameBoard.cs" />
     <Compile Include="UI\Class\GameBoardPosition.cs" />

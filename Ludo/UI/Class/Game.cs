@@ -1,6 +1,7 @@
 ﻿using Ludo.UI.Class.Controls;
 using Ludo.UI.Enum;
 using Ludo.UI.EventArg;
+using System;
 using System.Windows.Forms;
 
 namespace Ludo.UI.Class
@@ -12,10 +13,16 @@ namespace Ludo.UI.Class
         public Player[] Players = new Player[4];
         private Dice Dice = new Dice(false);
 
+        private Timer TransitionTimer = new Timer
+        {
+            Interval = 20
+        };
+
         public Game(GameBoardForm gameBoardForm)
         {
             GameBoardForm = gameBoardForm;
             Dice.DiceRolled += this.dice_Rolled;
+            TransitionTimer.Tick += (sender1, e1) => MyElapsedMethod(sender1, e1);
         }
 
         public void Start()
@@ -32,10 +39,39 @@ namespace Ludo.UI.Class
             // Check If minimum 2 players and max 4 players
             if (this.Players.Length >= 2 && this.Players.Length <= 4)
             {
-                GameBoardForm.Controls.Add(Dice.DiceRenderer);
-                Dice.DiceRenderer.Location = new System.Drawing.Point(800, 10);
+                GameBoardForm.Controls.Add(Dice.UIControl);
+                AddBtn();
+                Dice.UIControl.Location = new System.Drawing.Point(800, 10);
             }
             GameFlow.Start();
+        }
+
+        private void AddBtn()
+        {
+            Button btn = new Button();
+            btn.Click += (sender, e) => Transition(sender, e);
+            btn.Text = "Start Transition";
+            btn.Location = new System.Drawing.Point(800, 100);
+            GameBoardForm.Controls.Add(btn);
+        }
+
+        private void Transition(object sender, EventArgs e)
+        {
+            System.Drawing.Point point = GameBoardForm.PointToScreen(Players[0].Pieces[0].UIControl.Location);
+
+            Players[0].Pieces[0].UIControl.Location = point;
+            GameBoardForm.Controls.Add(Players[0].Pieces[0].UIControl);
+            Players[0].Pieces[0].UIControl.BringToFront();
+            TransitionTimer.Start();
+        }
+
+        public void MyElapsedMethod(object sender, EventArgs e)
+        {
+            //System.Drawing.Point point = GameBoardForm.PointToScreen(Players[0].Pieces[0].UIControl.Location);
+            System.Drawing.Point point = Players[0].Pieces[0].UIControl.Location;
+            int x = point.X;
+            int y = point.Y + 1;
+            Players[0].Pieces[0].UIControl.Location = new System.Drawing.Point(x, y);
         }
 
         public void End() { }

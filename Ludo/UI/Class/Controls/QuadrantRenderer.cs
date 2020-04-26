@@ -64,7 +64,7 @@ namespace Ludo.UI.Class
 
 
             this.timer1 = new System.Windows.Forms.Timer();
-            this.timer1.Interval = 500;
+            this.timer1.Interval = 300;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
         }
 
@@ -208,120 +208,116 @@ namespace Ludo.UI.Class
         {
             if (quadrantPos == 0)
             {
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0), 6, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1), 6, 5);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2), 6, 4);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3), 6, 3);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4), 6, 2);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5), 6, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6), 5, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7), 4, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8), 3, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9), 2, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10), 1, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11), 0, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12), 7, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13), 7, 5);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14), 7, 4);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15), 7, 3);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16), 7, 2);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17), 7, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18), 7, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0).UIControl, 6, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1).UIControl, 6, 5);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2).UIControl, 6, 4);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3).UIControl, 6, 3);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4).UIControl, 6, 2);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5).UIControl, 6, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6).UIControl, 5, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7).UIControl, 4, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8).UIControl, 3, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9).UIControl, 2, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10).UIControl, 1, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11).UIControl, 0, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12).UIControl, 7, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13).UIControl, 7, 5);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14).UIControl, 7, 4);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15).UIControl, 7, 3);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16).UIControl, 7, 2);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17).UIControl, 7, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18).UIControl, 7, 0);
             }
             if (quadrantPos == 1)
             {
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0), 0, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1), 1, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2), 2, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3), 3, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4), 4, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5), 5, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6), 6, 5);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7), 6, 4);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8), 6, 3);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9), 6, 2);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10), 6, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11), 6, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12), 0, 7);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13), 1, 7);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14), 2, 7);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15), 3, 7);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16), 4, 7);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17), 5, 7);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18), 6, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0).UIControl, 0, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1).UIControl, 1, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2).UIControl, 2, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3).UIControl, 3, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4).UIControl, 4, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5).UIControl, 5, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6).UIControl, 6, 5);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7).UIControl, 6, 4);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8).UIControl, 6, 3);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9).UIControl, 6, 2);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10).UIControl, 6, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11).UIControl, 6, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12).UIControl, 0, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13).UIControl, 1, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14).UIControl, 2, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15).UIControl, 3, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16).UIControl, 4, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17).UIControl, 5, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18).UIControl, 6, 7);
             }
             if (quadrantPos == 2)
             {
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0), 1, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1), 1, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2), 1, 2);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3), 1, 3);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4), 1, 4);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5), 1, 5);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6), 2, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7), 3, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8), 3, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9), 4, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10), 5, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11), 6, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12), 0, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13), 0, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14), 0, 2);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15), 0, 3);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16), 0, 4);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17), 0, 5);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18), 0, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0).UIControl, 1, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1).UIControl, 1, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2).UIControl, 1, 2);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3).UIControl, 1, 3);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4).UIControl, 1, 4);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5).UIControl, 1, 5);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6).UIControl, 2, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7).UIControl, 3, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8).UIControl, 3, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9).UIControl, 4, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10).UIControl, 5, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11).UIControl, 6, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12).UIControl, 0, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13).UIControl, 0, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14).UIControl, 0, 2);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15).UIControl, 0, 3);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16).UIControl, 0, 4);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17).UIControl, 0, 5);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18).UIControl, 0, 6);
             }
             if (quadrantPos == 3)
             {
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0), 6, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1), 5, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2), 4, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3), 3, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4), 2, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5), 1, 1);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6), 0, 2);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7), 0, 3);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8), 0, 4);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9), 0, 5);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10), 0, 6);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11), 0, 7);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12), 6, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13), 5, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14), 4, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15), 3, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16), 2, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17), 1, 0);
-                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18), 0, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(0).UIControl, 6, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(1).UIControl, 5, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(2).UIControl, 4, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(3).UIControl, 3, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(4).UIControl, 2, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(5).UIControl, 1, 1);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(6).UIControl, 0, 2);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(7).UIControl, 0, 3);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(8).UIControl, 0, 4);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(9).UIControl, 0, 5);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(10).UIControl, 0, 6);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(11).UIControl, 0, 7);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(12).UIControl, 6, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(13).UIControl, 5, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(14).UIControl, 4, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(15).UIControl, 3, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(16).UIControl, 2, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(17).UIControl, 1, 0);
+                this.MainTableLayout.Controls.Add(this.GetQuadrantGhor(18).UIControl, 0, 0);
             }
         }
 
         private Ghor GetQuadrantGhor(int position)
         {
             Ghor ghor = this.Quadrant.GetGhorByPosition(position);
-            ghor.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
+            ghor.UIControl.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
             | AnchorStyles.Left) | AnchorStyles.Right)));
             if (position == 1 || position >= 13)
             {
-                ghor.BackColor = Utils.Util.GetDrawingColor(Color);
-                if (ghor.Position == 18)
-                {
-                    ghor.Position = -1;
-                }
+                ghor.UIControl.BackColor = Utils.Util.GetDrawingColor(Color);
             }
             else
             {
-                ghor.BackColor = System.Drawing.Color.White;
+                ghor.UIControl.BackColor = System.Drawing.Color.White;
             }
-            ghor.Margin = new System.Windows.Forms.Padding(0);
-            ghor.Size = new System.Drawing.Size(49, 49);
+            ghor.UIControl.Margin = new System.Windows.Forms.Padding(0);
+            ghor.UIControl.Size = new System.Drawing.Size(49, 49);
 
             Label label = new System.Windows.Forms.Label();
             label.AutoSize = true;
             label.Location = new System.Drawing.Point(18, 18);
             label.Text = ghor.Position.ToString();
 
-            ghor.Controls.Add(label);
+            ghor.UIControl.Controls.Add(label);
 
             return ghor;
         }

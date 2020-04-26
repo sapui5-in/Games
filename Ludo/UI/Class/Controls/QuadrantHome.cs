@@ -10,7 +10,7 @@ namespace Ludo.UI.Class.Controls
     public class QuadrantHome : Control
     {
         public Color Color;
-        public QuadrantHomeRenderer QuadrantHomeRenderer;
+        public QuadrantHomeRenderer UIControl;
         public Ghor[] GhorPositions =
         {
             new Ghor(0, GhorType.Home),
@@ -26,7 +26,7 @@ namespace Ludo.UI.Class.Controls
 
         private void Renderer()
         {
-            QuadrantHomeRenderer = new QuadrantHomeRenderer(this);
+            UIControl = new QuadrantHomeRenderer(this);
         }
 
         public Ghor GetGhorByPosition(int position)

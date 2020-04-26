@@ -12,7 +12,7 @@ namespace Ludo.UI.Class
 {
     public class Piece
     {
-        public PieceRenderer PieceRenderer = new PieceRenderer();
+        public PieceRenderer UIControl = new PieceRenderer();
 
         public delegate void EventHandler(object sender, PiecePositionChangedEventArgs e);
         public event EventHandler PositionChanged;
@@ -22,6 +22,23 @@ namespace Ludo.UI.Class
 
         public int Position;
         public Color Color;
+
+        private List<GameBoardPosition> transitionPositions;
+        public List<GameBoardPosition> TransitionPositions
+        {
+            get
+            {
+                return transitionPositions;
+            }
+            set
+            {
+                transitionPositions = value;
+                if (transitionPositions.Count > 0)
+                {
+                    GameBoardPosition = transitionPositions[transitionPositions.Count - 1];
+                }
+            }
+        }
 
         private GameBoardPosition gameBoardPosition;
         public GameBoardPosition GameBoardPosition
@@ -60,11 +77,11 @@ namespace Ludo.UI.Class
                 movable = value;
                 if (Movable)
                 {
-                    this.PieceRenderer.Enabled = true;
+                    this.UIControl.Enabled = true;
                 }
                 else
                 {
-                    this.PieceRenderer.Enabled = false;
+                    this.UIControl.Enabled = false;
                 }
             }
         }
@@ -75,9 +92,9 @@ namespace Ludo.UI.Class
             Color = color;
             Position = position;
 
-            PieceRenderer.SetColor(color);
+            UIControl.SetColor(color);
 
-            PieceRenderer.Click += this.PieceClick;
+            UIControl.Click += this.PieceClick;
         }
 
         public void PieceClick(object sender, EventArgs e)

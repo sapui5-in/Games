@@ -12,7 +12,7 @@ namespace Ludo.UI.Class
     {
         public int QuadrantPosition;
         public int BoardSize;
-        public QuadrantRenderer QuadrantRenderer;
+        public QuadrantRenderer UIControl;
         public QuadrantHome QuadrantHome;
         public Ghor[] GhorPath = {
                 new Ghor(0, GhorType.Normal),
@@ -91,7 +91,7 @@ namespace Ludo.UI.Class
 
         private void Renderer()
         {
-            QuadrantRenderer = new QuadrantRenderer(this);
+            UIControl = new QuadrantRenderer(this);
         }
     }
 }

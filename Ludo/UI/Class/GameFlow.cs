@@ -2,6 +2,7 @@
 using Ludo.UI.Enum;
 using Ludo.UI.EventArg;
 using Ludo.UI.Utils;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -56,7 +57,7 @@ namespace Ludo.UI.Class
         {
             foreach (Piece piece in CurrentPlayer.Pieces)
             {
-                if (CheckValidMove(CurrentPlayer, piece) != null)
+                if (CheckValidMove(CurrentPlayer, piece).Count > 0)
                 {
                     return true;
                 }
@@ -71,10 +72,10 @@ namespace Ludo.UI.Class
             List<PiecePosition> piecePositions = new List<PiecePosition>();
             foreach (Piece piece in CurrentPlayer.Pieces)
             {
-                GameBoardPosition position = CheckValidMove(CurrentPlayer, piece);
-                if (position != null)
+                List<GameBoardPosition> positions = CheckValidMove(CurrentPlayer, piece);
+                if (positions.Count > 0)
                 {
-                    piecePositions.Add(new PiecePosition(piece, position));
+                    piecePositions.Add(new PiecePosition(piece, positions));
                 }
             }
 
@@ -100,7 +101,7 @@ namespace Ludo.UI.Class
         {
             foreach (Piece piece in CurrentPlayer.Pieces)
             {
-                if (CheckValidMove(CurrentPlayer, piece) != null)
+                if (CheckValidMove(CurrentPlayer, piece).Count > 0)
                 {
                     piece.Movable = true;
                 }
@@ -116,6 +117,59 @@ namespace Ludo.UI.Class
             this.MovePiece(piece);
         }
 
+        private void TransitionTimer_Tick(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void ShowTransitions(Piece piece)
+        {
+            //Timer TransitionTimer;
+            //TransitionTimer = new Timer
+            //{
+            //    Interval = 2000
+            //};
+
+            foreach (GameBoardPosition position in piece.TransitionPositions)
+            {
+                Ghor ghor = position.Ghor;
+                ghor.UIControl.Controls.Add(piece.UIControl);
+                piece.UIControl.BringToFront();
+
+            }
+
+            //TransitionTimeEventArgs ev = new TransitionTimeEventArgs
+            //{
+            //    Piece = piece,
+            //    Position = piece.TransitionPositions[0],
+            //    TransitionPositions = piece.TransitionPositions
+            //};
+            //TransitionTimer.Tick += (sender, e) => MyElapsedMethod(sender, e, ev);
+            //TransitionTimer.Start();
+        }
+
+        public void MyElapsedMethod(object sender, EventArgs e, TransitionTimeEventArgs ev)
+        {
+            //int x = ev.Piece.PieceRenderer.Location.X;
+            //int y = ev.Piece.PieceRenderer.Location.Y;
+
+            //while (x > 10 && y < 1000)
+            {
+                //ev.Piece.PieceRenderer.Location = new System.Drawing.Point(x++, y++);
+            }
+        }
+
+        //private void PieceTransition(TransitionTimeEventArgs ev, Piece piece)
+        //{
+        //    int x = piece.PieceRenderer.Location.X;
+        //    int y = piece.PieceRenderer.Location.Y;
+
+        //    while (x > 10 && y > 10)
+        //    {
+        //        piece.PieceRenderer.Location = new System.Drawing.Point(x--, y--);
+        //    }
+        //}
+
         public void PieceMoved(PiecePositionChangedEventArgs e)
         {
             // Once a Piece is Moved, do some checks like
@@ -125,32 +179,41 @@ namespace Ludo.UI.Class
 
             if (e.Piece.GameBoardPosition != null)
             {
-                Ghor ghor = e.NewPosition.Ghor;
-                ghor.Controls.Add(e.Piece.PieceRenderer);
-                e.Piece.PieceRenderer.BringToFront();
+                ShowTransitions(e.Piece);
 
-                if (e.Piece.GameBoardPosition.Ghor.GhorType != GhorType.Home)
+                if (e.Piece.GameBoardPosition.Ghor.Position == 18)
                 {
-                    if (TakeOpponentPiece(e.Piece))
+                    Dice.CanDiceBeRolled = false;
+                    e.Piece.GameBoardPosition.Quadrant.UIControl.Active = false;
+                    MessageBox.Show("GameOver!!");
+                    // Set Action for Game Over
+                }
+                else
+                {
+                    if (e.Piece.GameBoardPosition.Ghor.GhorType != GhorType.Home)
                     {
-                        CurrentPlayer.DisableAllPieceMovement();
-                    } else
-                    {
-                        if (!ContinueCurrentPlayerTurn())
-                        {
-                            Player nextPlayer = this.GetNextPlayer();
-                            if (nextPlayer != null)
-                            {
-                                this.SetCurrentPlayer(nextPlayer);
-                            }
-                        }
-                        else
+                        if (TakeOpponentPiece(e.Piece))
                         {
                             CurrentPlayer.DisableAllPieceMovement();
                         }
+                        else
+                        {
+                            if (!ContinueCurrentPlayerTurn())
+                            {
+                                Player nextPlayer = this.GetNextPlayer();
+                                if (nextPlayer != null)
+                                {
+                                    this.SetCurrentPlayer(nextPlayer);
+                                }
+                            }
+                            else
+                            {
+                                CurrentPlayer.DisableAllPieceMovement();
+                            }
+                        }
                     }
+                    Dice.CanDiceBeRolled = true;
                 }
-                Dice.CanDiceBeRolled = true;
             }
         }
 
@@ -181,23 +244,25 @@ namespace Ludo.UI.Class
         private void MovePiece(Piece piece)
         {
             // Show Transition
-            GameBoardPosition newPosition = this.CheckValidMove(CurrentPlayer, piece);
+            List<GameBoardPosition> positions = this.CheckValidMove(CurrentPlayer, piece);
 
-            if (newPosition != null)
+            if (positions.Count > 0)
             {
                 // Show Transition
 
                 //Move to Final Position
-                piece.GameBoardPosition = newPosition;
+                piece.TransitionPositions = positions;
             }
         }
 
-        public GameBoardPosition CheckValidMove(Player player, Piece piece)
+        public List<GameBoardPosition> CheckValidMove(Player player, Piece piece)
         {
+            List<GameBoardPosition> positions = new List<GameBoardPosition>();
+
             bool flag = true;
             int diceValue = DiceValue;
 
-            if (piece.GameBoardPosition.Ghor.Position != -1)
+            if (piece.GameBoardPosition.Ghor.Position != 18)
             {
                 // From Home, only 6 can make him move to Start Star
                 if (piece.GameBoardPosition.Ghor.GhorType == GhorType.Home)
@@ -216,14 +281,12 @@ namespace Ludo.UI.Class
                 {
                     GameBoardPosition currentPiecePosition =
                         new GameBoardPosition(piece.GameBoardPosition.Quadrant, piece.GameBoardPosition.Ghor);
-                    GameBoardPosition newPosition =
-                        this.GameBoardForm.GetNthGhorPosition(currentPiecePosition, diceValue, player);
-
-                    return newPosition;
+                    positions =
+                        this.GameBoardForm.GetNthGhorPosition(currentPiecePosition, diceValue, player, positions);
                 }
             }
 
-            return null;
+            return positions;
         }
 
         private bool ContinueCurrentPlayerTurn()
@@ -242,11 +305,11 @@ namespace Ludo.UI.Class
         {
             if (CurrentPlayer != null)
             {
-                CurrentPlayer.Quadrant.QuadrantRenderer.Active = false;
+                CurrentPlayer.Quadrant.UIControl.Active = false;
             }
             CurrentPlayer = player;
-            CurrentPlayer.Quadrant.QuadrantRenderer.Active = true;
-            Dice.DiceRenderer.BackColor = Util.GetDrawingColor(CurrentPlayer.Color);
+            CurrentPlayer.Quadrant.UIControl.Active = true;
+            Dice.UIControl.BackColor = Util.GetDrawingColor(CurrentPlayer.Color);
         }
 
         private Player GetNextPlayer()

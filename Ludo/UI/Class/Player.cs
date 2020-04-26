@@ -17,7 +17,7 @@ namespace Ludo.UI.Class
         public event EventHandler PieceMoved;
         public event PieceClickEventHandler PieceClicked;
 
-        public Piece[] Pieces = new Piece[4];
+        public Piece[] Pieces = new Piece[1];
 
         public Enum.Color Color;
 
@@ -97,7 +97,9 @@ namespace Ludo.UI.Class
         {
             for (int i = 0; i < this.Pieces.Length; i++)
             {
-                this.Pieces[i].GameBoardPosition = new GameBoardPosition(Quadrant, Quadrant.QuadrantHome.GhorPositions[i]);
+                this.Pieces[i].TransitionPositions = new List<GameBoardPosition>{
+                    new GameBoardPosition(Quadrant, Quadrant.QuadrantHome.GhorPositions[i])
+                };
             }
         }
     }

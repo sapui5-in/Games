@@ -9,7 +9,7 @@ namespace Ludo.UI.Class
 {
     public class Dice : Control
     {
-        public DiceRenderer DiceRenderer = new DiceRenderer();
+        public DiceRenderer UIControl = new DiceRenderer();
 
         public delegate void EventHandler(object sender, DiceRollEventArgs e);
         public event EventHandler DiceRolled;
@@ -27,11 +27,11 @@ namespace Ludo.UI.Class
 
                 if (value)
                 {
-                    DiceRenderer.Enabled = true;
+                    UIControl.Enabled = true;
                 }
                 else
                 {
-                    DiceRenderer.Enabled = false;
+                    UIControl.Enabled = false;
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace Ludo.UI.Class
         public Dice(bool canDiceBeRolled)
         {
             CanDiceBeRolled = canDiceBeRolled;
-            DiceRenderer.Click += new System.EventHandler(this.dice_Click);
+            UIControl.Click += new System.EventHandler(this.dice_Click);
         }
 
         public void Roll()
@@ -48,7 +48,7 @@ namespace Ludo.UI.Class
             {
                 Random random = new Random();
                 int diceValue = random.Next(1, 7);
-                DiceRenderer.Text = diceValue.ToString();
+                UIControl.Text = diceValue.ToString();
                 CanDiceBeRolled = false;
 
                 if (DiceRolled != null)

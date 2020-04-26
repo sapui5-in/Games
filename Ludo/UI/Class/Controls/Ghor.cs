@@ -3,8 +3,10 @@ using System.Windows.Forms;
 
 namespace Ludo.UI.Class.Controls
 {
-    public class Ghor : Panel
+    public class Ghor
     {
+        public GhorRenderer UIControl = new GhorRenderer();
+
         public int Position;
         public GhorType GhorType;
 

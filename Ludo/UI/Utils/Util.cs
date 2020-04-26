@@ -51,7 +51,7 @@ namespace Ludo.UI.Utils
             }
             else
             {
-                col = System.Drawing.Color.Yellow;
+                col = System.Drawing.ColorTranslator.FromHtml("#dbc300");
             }
 
             return col;

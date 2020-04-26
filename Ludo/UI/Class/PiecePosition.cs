@@ -9,12 +9,12 @@ namespace Ludo.UI.Class
     public class PiecePosition
     {
         public Piece Piece;
-        public GameBoardPosition Position;
+        public List<GameBoardPosition> Positions;
 
-        public PiecePosition(Piece piece, GameBoardPosition position)
+        public PiecePosition(Piece piece, List<GameBoardPosition> positions)
         {
             Piece = piece;
-            Position = position;
+            Positions = positions;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Ludo.UI.Class.Controls
             this.Renderer();
         }
 
-        private void Renderer ()
+        private void Renderer()
         {
             Container = this.RenderOuterContainer();
             Container.Controls.Add(this.RenderInnerContainer());
@@ -73,10 +73,10 @@ namespace Ludo.UI.Class.Controls
             tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             tableLayoutPanel.Size = new System.Drawing.Size(149, 149);
 
-            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(1), 0, 0);
-            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(2), 2, 0);
-            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(0), 0, 2);
-            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(3), 2, 2);
+            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(1).UIControl, 0, 0);
+            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(2).UIControl, 2, 0);
+            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(0).UIControl, 0, 2);
+            tableLayoutPanel.Controls.Add(this.GetQuadrantGhor(3).UIControl, 2, 2);
 
             return tableLayoutPanel;
         }
@@ -84,24 +84,18 @@ namespace Ludo.UI.Class.Controls
         private Ghor GetQuadrantGhor(int position)
         {
             Ghor ghor = this.QuadrantHome.GetGhorByPosition(position);
-            ghor.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
-            | AnchorStyles.Left) | AnchorStyles.Right)));
-
             System.Drawing.Color color;
 
             color = Util.GetDrawingColor(QuadrantHome.Color);
-
-            ghor.BackColor = color;
-            ghor.Margin = new System.Windows.Forms.Padding(0);
-            ghor.Size = new System.Drawing.Size(49, 49);
-            ghor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            ghor.UIControl.BackColor = color;
+            ghor.UIControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
             Label label = new System.Windows.Forms.Label();
             label.AutoSize = true;
             label.Location = new System.Drawing.Point(18, 18);
             label.Text = ghor.Position.ToString();
 
-            ghor.Controls.Add(label);
+            ghor.UIControl.Controls.Add(label);
 
             return ghor;
         }

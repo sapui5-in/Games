@@ -1,5 +1,6 @@
 ﻿using Ludo.UI.Class.Controls;
 using Ludo.UI.Enum;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Ludo.UI.Class
@@ -33,7 +34,7 @@ namespace Ludo.UI.Class
                 Quadrants[i] = new Quadrant(i, BoardSize);
                 this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                 this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                this.Controls.Add(Quadrants[i].QuadrantRenderer.Container);
+                this.Controls.Add(Quadrants[i].UIControl.Container);
             }
         }
 
@@ -56,77 +57,82 @@ namespace Ludo.UI.Class
 
         public GameBoardPosition GetNextGhor(GameBoardPosition gameBoardPosition, Player player)
         {
-            Ghor ghor = gameBoardPosition.Ghor;
-            Quadrant quadrant = gameBoardPosition.Quadrant;
+            if (gameBoardPosition != null)
+            {
 
-            if (ghor != null && ghor.Position == -1)
-            {
-                return null;
-            }
-            else if (ghor.GhorType == GhorType.Home)
-            {
-                // Move to Home Star
-                gameBoardPosition.Ghor = quadrant.GhorPath[1];
-            }
-            else if (ghor.Position == 11)
-            {
-                //Move to Next Quadrant
-                gameBoardPosition.Quadrant = this.GetNextQuadrant(quadrant);
-                gameBoardPosition.Ghor = gameBoardPosition.Quadrant.GhorPath[12];
-            }
-            else if (ghor.Position == 12)
-            {
-                if (gameBoardPosition.Quadrant.Color == player.Color)
+                Ghor ghor = gameBoardPosition.Ghor;
+                Quadrant quadrant = gameBoardPosition.Quadrant;
+
+                if (ghor != null && ghor.Position == 18)
                 {
-                    // Move to Final Line
-                    gameBoardPosition.Ghor = gameBoardPosition.Quadrant.GhorPath[13];
+                    return null;
+                }
+                else if (ghor.GhorType == GhorType.Home)
+                {
+                    // Move to Home Star
+                    gameBoardPosition.Ghor = quadrant.GhorPath[1];
+                }
+                else if (ghor.Position == 11)
+                {
+                    //Move to Next Quadrant
+                    gameBoardPosition.Quadrant = this.GetNextQuadrant(quadrant);
+                    gameBoardPosition.Ghor = gameBoardPosition.Quadrant.GhorPath[12];
+                }
+                else if (ghor.Position == 12)
+                {
+                    if (gameBoardPosition.Quadrant.Color == player.Color)
+                    {
+                        // Move to Final Line
+                        gameBoardPosition.Ghor = gameBoardPosition.Quadrant.GhorPath[13];
+                    }
+                    else
+                    {
+                        gameBoardPosition.Ghor = gameBoardPosition.Quadrant.GhorPath[0];
+                    }
+                }
+                else if (ghor == quadrant.GetLastGhor())
+                {
+                    // Matured
+                    gameBoardPosition.Ghor = new Ghor(18);
                 }
                 else
                 {
-                    gameBoardPosition.Ghor = gameBoardPosition.Quadrant.GhorPath[0];
+                    // Proceed One ghor
+                    gameBoardPosition.Ghor = quadrant.GhorPath[ghor.Position + 1];
                 }
-            }
-            else if (ghor == quadrant.GetLastGhor())
-            {
-                // Matured
-                gameBoardPosition.Ghor = new Ghor(-1);
+
+                return gameBoardPosition;
             }
             else
             {
-                // Proceed One ghor
-                gameBoardPosition.Ghor = quadrant.GhorPath[ghor.Position + 1];
+                return null;
             }
-
-            return gameBoardPosition;
         }
 
-        public GameBoardPosition GetNthGhorPosition(GameBoardPosition gameBoardPosition, int count, Player player)
+        public List<GameBoardPosition> GetNthGhorPosition(
+            GameBoardPosition gameBoardPosition, int count, Player player, List<GameBoardPosition> positions)
         {
+            bool flag = false;
+
             if (count >= 1 && count <= 6)
             {
                 for (int i = 0; i < count; i++)
                 {
-                    if (gameBoardPosition.Ghor.Position == -1 && i == count - 1)
+                    gameBoardPosition = this.GetNextGhor(gameBoardPosition, player);
+                    if (gameBoardPosition == null)
                     {
-                        return gameBoardPosition;
+                        flag = true;
+                        break;
                     }
-                    else if (gameBoardPosition.Ghor.Position == -1 && i < count - 1)
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        gameBoardPosition = this.GetNextGhor(gameBoardPosition, player);
-                    }
+                    positions.Add(gameBoardPosition);
                 }
             }
-            else
+            if (flag)
             {
-                return null;
+                positions.Clear();
             }
 
-
-            return gameBoardPosition;
+            return positions;
         }
     }
 }
