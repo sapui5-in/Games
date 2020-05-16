@@ -11,13 +11,14 @@ namespace Ludo.UI.Class
 {
     public class Player : IPlayer
     {
+        public int Id;
         public delegate void EventHandler(object sender, PiecePositionChangedEventArgs e);
         public delegate void PieceClickEventHandler(object sender, PieceClickEventArgs e);
 
         public event EventHandler PieceMoved;
         public event PieceClickEventHandler PieceClicked;
 
-        public Piece[] Pieces = new Piece[1];
+        public Piece[] Pieces = new Piece[4];
 
         public Enum.Color Color;
 
@@ -35,12 +36,13 @@ namespace Ludo.UI.Class
             set
             {
                 quadrant = value;
-                this.SetInitialPiecePosition();
+                //this.SetInitialPiecePosition();
             }
         }
 
-        public Player(Enum.Color color)
+        public Player(int id, Enum.Color color)
         {
+            Id = id;
             Color = color;
             for (int i = 0; i < Pieces.Length; i++)
             {
@@ -81,8 +83,6 @@ namespace Ludo.UI.Class
                 PieceMoved(this, new PiecePositionChangedEventArgs
                 {
                     Piece = (sender as Piece),
-                    OldPosition = e.OldPosition,
-                    NewPosition = e.NewPosition,
                     Player = this
                 });
             }
@@ -91,16 +91,6 @@ namespace Ludo.UI.Class
         public Player(System.Drawing.Color color)
         {
             this.red = color;
-        }
-
-        private void SetInitialPiecePosition()
-        {
-            for (int i = 0; i < this.Pieces.Length; i++)
-            {
-                this.Pieces[i].TransitionPositions = new List<GameBoardPosition>{
-                    new GameBoardPosition(Quadrant, Quadrant.QuadrantHome.GhorPositions[i])
-                };
-            }
         }
     }
 }

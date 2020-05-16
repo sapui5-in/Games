@@ -86,6 +86,39 @@ namespace Ludo.Migrations
                     b.ToTable("Games");
                 });
 
+            modelBuilder.Entity("Ludo.API.Model.GameConfig", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GameConfig");
+                });
+
+            modelBuilder.Entity("Ludo.API.Model.GameGameConfig", b =>
+                {
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GameConfigId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GameConfigValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GameId", "GameConfigId");
+
+                    b.HasIndex("GameConfigId");
+
+                    b.ToTable("GameGameConfigs");
+                });
+
             modelBuilder.Entity("Ludo.API.Model.GamePlayer", b =>
                 {
                     b.Property<int>("GameId")
@@ -115,10 +148,13 @@ namespace Ludo.Migrations
                     b.Property<int>("PieceNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("PieceGhorPosition")
+                    b.Property<int>("GhorPosition")
                         .HasColumnType("int");
 
-                    b.Property<int>("PieceQuadrant")
+                    b.Property<string>("GhorType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quadrant")
                         .HasColumnType("int");
 
                     b.HasKey("GameId", "PlayerId", "PieceNumber");
@@ -199,6 +235,25 @@ namespace Ludo.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Ludo.Models.DiceStack", b =>
+                {
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiceValue1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiceValue2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiceValue3")
+                        .HasColumnType("int");
+
+                    b.HasKey("GameId");
+
+                    b.ToTable("DiceStacks");
+                });
+
             modelBuilder.Entity("Ludo.API.Model.Address", b =>
                 {
                     b.HasOne("Ludo.API.Model.User", "User")
@@ -219,6 +274,21 @@ namespace Ludo.Migrations
                     b.HasOne("Ludo.API.Model.GameStatus", "GameStatus")
                         .WithMany("Games")
                         .HasForeignKey("GameStatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Ludo.API.Model.GameGameConfig", b =>
+                {
+                    b.HasOne("Ludo.API.Model.GameConfig", "GameConfig")
+                        .WithMany("GameGameConfigs")
+                        .HasForeignKey("GameConfigId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Ludo.API.Model.Game", "Game")
+                        .WithMany("GameGameConfigs")
+                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
@@ -263,6 +333,15 @@ namespace Ludo.Migrations
 
                     b.HasOne("Ludo.API.Model.Game", "Game")
                         .WithMany("GameProgresses")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Ludo.Models.DiceStack", b =>
+                {
+                    b.HasOne("Ludo.API.Model.Game", "Game")
+                        .WithMany("DiceStacks")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();

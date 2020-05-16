@@ -78,3 +78,4 @@ C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\bin\Debug\ru\Microsoft.Data
 C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\bin\Debug\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.csproj.CopyComplete
+C:\Users\dhrubajyoti.rakshit\source\repos\Games\Ludo\obj\Debug\Ludo.UI.Class.GameCreateForm.resources

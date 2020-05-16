@@ -147,19 +147,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Model\Address.cs" />
-    <Compile Include="API\Model\Config\AddressConfiguration.cs" />
-    <Compile Include="API\Model\Config\GamePlayerPiecePosition.cs" />
-    <Compile Include="API\Model\Config\GameStatusConfiguration.cs" />
-    <Compile Include="API\Model\Config\GameProgressConfiguration.cs" />
-    <Compile Include="API\Model\Config\GamePlayerConfiguration.cs" />
-    <Compile Include="API\Model\Config\UserConfiguration.cs" />
-    <Compile Include="API\Model\GameStatus.cs" />
-    <Compile Include="API\Model\Game.cs" />
-    <Compile Include="API\Model\GamePlayer.cs" />
-    <Compile Include="API\Model\GamePlayerPiecePosition.cs" />
-    <Compile Include="API\Model\GameProgress.cs" />
-    <Compile Include="API\Model\LudoContext.cs" />
+    <Compile Include="Migrations\20200509115221_init6.cs" />
+    <Compile Include="Migrations\20200509115221_init6.designer.cs">
+      <DependentUpon>20200509115221_init6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200515231543_DiceStack.cs" />
+    <Compile Include="Migrations\20200515231543_DiceStack.designer.cs">
+      <DependentUpon>20200515231543_DiceStack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200515231757_DiceStack1.cs" />
+    <Compile Include="Migrations\20200515231757_DiceStack1.designer.cs">
+      <DependentUpon>20200515231757_DiceStack1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200515233027_DiceStack2.cs" />
+    <Compile Include="Migrations\20200515233027_DiceStack2.designer.cs">
+      <DependentUpon>20200515233027_DiceStack2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20200516123324_DiceStack3.cs" />
+    <Compile Include="Migrations\20200516123324_DiceStack3.designer.cs">
+      <DependentUpon>20200516123324_DiceStack3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Config\AddressConfiguration.cs" />
+    <Compile Include="Models\Config\GameGameConfigConfiguration.cs" />
+    <Compile Include="Models\Config\DiceStackConfiguration.cs" />
+    <Compile Include="Models\Config\GamePlayerPiecePosition.cs" />
+    <Compile Include="Models\Config\GameStatusConfiguration.cs" />
+    <Compile Include="Models\Config\GameProgressConfiguration.cs" />
+    <Compile Include="Models\Config\GamePlayerConfiguration.cs" />
+    <Compile Include="Models\Config\UserConfiguration.cs" />
+    <Compile Include="Models\DiceStack.cs" />
+    <Compile Include="Models\GameConfig.cs" />
+    <Compile Include="Models\GameGameConfig.cs" />
+    <Compile Include="Models\GameStatus.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GamePlayer.cs" />
+    <Compile Include="Models\GamePlayerPiecePosition.cs" />
+    <Compile Include="Models\GameProgress.cs" />
+    <Compile Include="Models\LudoContext.cs" />
     <Compile Include="Migrations\20200503202528_init.cs" />
     <Compile Include="Migrations\20200503202528_init.designer.cs">
       <DependentUpon>20200503202528_init.cs</DependentUpon>
@@ -168,10 +193,25 @@
     <Compile Include="Migrations\20200503205550_init1.designer.cs">
       <DependentUpon>20200503205550_init1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20200506184911_GameConfig.cs" />
+    <Compile Include="Migrations\20200506184911_GameConfig.designer.cs">
+      <DependentUpon>20200506184911_GameConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LudoContextModelSnapshot.cs" />
+    <Compile Include="Services\GameDetails.cs" />
+    <Compile Include="Services\GameService.cs" />
+    <Compile Include="Services\IGameService.cs" />
+    <Compile Include="Services\Message.cs" />
+    <Compile Include="Services\ServiceResponse.cs" />
+    <Compile Include="UI\Class\GameCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Class\GameCreateForm.Designer.cs">
+      <DependentUpon>GameCreateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Class\GameType.cs" />
-    <Compile Include="API\Model\User.cs" />
-    <Compile Include="API\Model\UserRegistration.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRegistration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Class\Controls\Control.cs" />
@@ -202,7 +242,6 @@
     <Compile Include="UI\Class\GameBoardForm.Designer.cs">
       <DependentUpon>GameBoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Class\GameFlow.cs" />
     <Compile Include="UI\Class\PiecePosition.cs" />
     <Compile Include="UI\Class\Player.cs" />
     <Compile Include="UI\Class\Controls\QuadrantRenderer.cs" />
@@ -228,7 +267,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="API\Enums\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Class\Form1.resx">
@@ -236,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Class\GameBoardForm.resx">
       <DependentUpon>GameBoardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Class\GameCreateForm.resx">
+      <DependentUpon>GameCreateForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

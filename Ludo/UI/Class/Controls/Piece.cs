@@ -33,9 +33,15 @@ namespace Ludo.UI.Class
             set
             {
                 transitionPositions = value;
-                if (transitionPositions.Count > 0)
+
+                PiecePositionChangedEventArgs EvtArgs = new PiecePositionChangedEventArgs
                 {
-                    GameBoardPosition = transitionPositions[transitionPositions.Count - 1];
+                    Piece = this
+                };
+
+                if (PositionChanged != null)
+                {
+                    PositionChanged(this, EvtArgs);
                 }
             }
         }
@@ -49,19 +55,7 @@ namespace Ludo.UI.Class
             }
             set
             {
-                PiecePositionChangedEventArgs EvtArgs = new PiecePositionChangedEventArgs
-                {
-                    Piece = this,
-                    OldPosition = gameBoardPosition,
-                    NewPosition = value
-                };
-
                 gameBoardPosition = value;
-
-                if (PositionChanged != null && value != null)
-                {
-                    PositionChanged(this, EvtArgs);
-                }
             }
         }
 

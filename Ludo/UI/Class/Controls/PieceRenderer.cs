@@ -23,7 +23,7 @@ namespace Ludo.UI.Class
 
         public void SetColor(Color color)
         {
-            this.ForeColor = Util.GetDrawingColor(color);
+            this.BackColor = Util.GetDrawingColor(color);
         }
     }
 }

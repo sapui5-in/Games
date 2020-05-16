@@ -36,6 +36,20 @@ namespace Ludo.UI.Class
             }
         }
 
+        private int diceValue;
+        public int DiceValue
+        {
+            get
+            {
+                return diceValue;
+            }
+            set
+            {
+                UIControl.Text = value.ToString();
+                diceValue = value;
+            }
+        }
+
         public Dice(bool canDiceBeRolled)
         {
             CanDiceBeRolled = canDiceBeRolled;
@@ -46,17 +60,11 @@ namespace Ludo.UI.Class
         {
             if (CanDiceBeRolled)
             {
-                Random random = new Random();
-                int diceValue = random.Next(1, 7);
-                UIControl.Text = diceValue.ToString();
                 CanDiceBeRolled = false;
 
                 if (DiceRolled != null)
                 {
-                    DiceRolled(this, new DiceRollEventArgs
-                    {
-                        DiceValue = diceValue
-                    });
+                    DiceRolled(this, new DiceRollEventArgs());
                 }
             }
         }

@@ -56,5 +56,65 @@ namespace Ludo.UI.Utils
 
             return col;
         }
+
+        public static int GetQuadrantFromColor(Color color)
+        {
+            if (color == Enum.Color.Red)
+            {
+                return 0;
+            }
+            else if (color == Enum.Color.Green)
+            {
+                return 1;
+            }
+            else if (color == Enum.Color.Blue)
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+
+        public static Color GetColorFromQuadrant(int quadrant)
+        {
+            if (quadrant == 0)
+            {
+                return Enum.Color.Red;
+            }
+            else if (quadrant == 1)
+            {
+                return Enum.Color.Green;
+            }
+            else if (quadrant == 2)
+            {
+                return Enum.Color.Blue;
+            }
+            else
+            {
+                return Enum.Color.Yellow;
+            }
+        }
+
+        public static string GetGhorTypeFromEnum(GhorType ghorType)
+        {
+            if (ghorType == GhorType.Star)
+            {
+                return "Star";
+            }
+            else if (ghorType == GhorType.Home)
+            {
+                return "Home";
+            }
+            else if (ghorType == GhorType.Normal)
+            {
+                return "Normal";
+            }
+            else
+            {
+                return "FinalLine";
+            }
+        }
     }
 }

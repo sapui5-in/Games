@@ -1,4 +1,6 @@
-﻿using Ludo.UI.Class.Controls;
+﻿using Ludo.API.Model;
+using Ludo.Services;
+using Ludo.UI.Class.Controls;
 using Ludo.UI.Enum;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,8 +12,11 @@ namespace Ludo.UI.Class
         public bool Flag = true;
         public int BoardSize = 750;
         public Quadrant[] Quadrants = new Quadrant[4];
+        public Game Game;
+        public Dice Dice = new Dice(false);
 
         public GameBoardForm()
+            : base()
         {
             InitializeComponent();
             Initialize();
@@ -23,8 +28,36 @@ namespace Ludo.UI.Class
             this.CreateQuadrants();
             this.ResumeLayout(false);
 
-            Game game = new Game(this);
-            game.Start();
+            Game = new Game(this);
+
+            AddDiceToForm();
+            AddReloadBtnToForm();
+        }
+
+        private void AddDiceToForm()
+        {
+            Button button = new System.Windows.Forms.Button();
+            this.Controls.Add(button);
+            button.Location = new System.Drawing.Point(800, 10);
+            button.Text = "Reload";
+
+            button.Click += ReloadButton_Click;
+        }
+
+        private void ReloadButton_Click(object sender, System.EventArgs e)
+        {
+            Game.Load();
+        }
+
+        private void AddReloadBtnToForm()
+        {
+            this.Controls.Add(Dice.UIControl);
+            Dice.UIControl.Location = new System.Drawing.Point(800, 40);
+        }
+
+        public void Start(int gameId)
+        {
+            Game.Start(gameId);
         }
 
         private void CreateQuadrants()
